@@ -46,17 +46,17 @@ __NOTE__: It is recommend you use either `smartCSR` or `fastCSR` as a
 or when manipulating lines.
 
 ``` js
-var blessed = require('blessed');
+const blessed = require('blessed');
 
 // Create a screen object.
-var screen = blessed.screen({
+let screen = blessed.screen({
   smartCSR: true
 });
 
 screen.title = 'my window title';
 
 // Create a box perfectly centered horizontally and vertically.
-var box = blessed.box({
+let box = blessed.box({
   top: 'center',
   left: 'center',
   width: '50%',
@@ -82,7 +82,7 @@ var box = blessed.box({
 screen.append(box);
 
 // Add a png icon to the box
-var icon = blessed.image({
+let icon = blessed.image({
   parent: box,
   top: 0,
   left: 0,
@@ -94,13 +94,13 @@ var icon = blessed.image({
 });
 
 // If our box is clicked, change the content.
-box.on('click', function(data) {
+box.on('click', (data) => {
   box.setContent('{center}Some different {red-fg}content{/red-fg}.{/center}');
   screen.render();
 });
 
 // If box is focused, handle `enter`/`return` and give us some more content.
-box.key('enter', function(ch, key) {
+box.key('enter', (ch, key) => {
   box.setContent('{right}Even different {black-fg}content{/black-fg}.{/right}\n');
   box.setLine(1, 'bar');
   box.insertLine(1, 'foo');
@@ -108,7 +108,7 @@ box.key('enter', function(ch, key) {
 });
 
 // Quit on Escape, q, or Control-C.
-screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+screen.key(['escape', 'q', 'C-c'], (ch, key) => {
   return process.exit(0);
 });
 
